@@ -1,0 +1,46 @@
+{
+"viz": {
+"active": true,
+"token": "VIZ",
+"lib": "viz-js-lib",
+"node": "wss://solox.world/ws",
+  "login": "user",
+  "posting_key": "5k",
+  "active_key": "5k",
+  "how_to_viz": 1,
+  "fee": 0
+},
+"golos": {
+  "active": true,
+  "token": "GOLOS",
+"lib": "golos-js",
+  "node": "wss://ws.golos.io",
+    "login": "denis-user2",
+    "posting_key": "5j",
+    "active_key": "5k",
+    "how_to_viz": 0.5,
+    "fee": 0
+  },
+  "steem": {
+    "active": true,
+    "token": "STEEM",
+"lib": "steem",
+    "node": "https://steemd.minnowsupportproject.org",
+    "login": "user3",
+    "posting_key": "5j",
+    "active_key": "5k",
+    "how_to_viz": 15,
+    "fee": 0
+  },
+  "whaleshares": {
+    "active": false,
+"token": "WLS",
+"lib": "@whaleshares/wlsjs",
+"node": "wss://wls.kennybll.com",
+    "login": "user4",
+    "posting_key": "5j",
+    "active_key": "5k",
+    "how_to_viz": 2.5,
+  "fee": 0
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@whaleshares/wlsjs": "latest",
+    "golos-js": "latest",
+    "nedb": "^1.8.0",
+    "steem": "latest",
+    "viz-js-lib": "^0.9.16"
+  }
+}
