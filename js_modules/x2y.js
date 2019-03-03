@@ -77,7 +77,7 @@ receive_approve = 'noSupportedToken';
 console.log(`Блокчейн-получатель: ${y}, статус: ${receive_approve}.`);
 if (receive_approve === 'ok') {
         amount = amount + ` ${y_token}`;
-      let memo = `Обмен ${x_token} на ${y_token}. Шлюз обмена: @${conf[y].login}, 1 ${x_token} =${curs} ${y_token}.`;
+      let memo = `Обмен ${x_token} на ${y_token}. Шлюз обмена: @${conf[y].login}, 1 ${x_token} =${curs} ${y_token}, комиссия ${conf[x].fee}%.`;
 return await sendTransfer(y, conf[y].active_key, conf[y].login, to, amount, memo);
 } else     if (receive_approve === 'noBalance') {
     let memo = `Вы отправили сумму, превышающую максимальную. Просьба смотреть максимумы в описании аккаунта шлюза @${conf[x].login}.`;

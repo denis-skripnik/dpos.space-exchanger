@@ -48,5 +48,5 @@ if (lest_block_time >= trx.time) {
 }}
 }
 
-setInterval(() => workingTrx(), 60000);
+setInterval(() => workingTrx(), 90000);
 setInterval(() => au.updateAccounts(), 3000);

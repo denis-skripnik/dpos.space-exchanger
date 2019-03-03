@@ -34,11 +34,8 @@ curs_str = curs_str.replace(/,\s*$/, "");
 if (msg_strings[x] !== `${balance_str}. ${curs_str}.` || !msg_strings[x]) {
 const account_x = await methods.getAccount(x, conf[x].login);
 var memo = account_x[0].memo_key;
-let 					metadata={};
-                        metadata.profile={};
-                    metadata.profile.about= `${balance_str},${curs_str},Комиссия ${conf[x].fee}%,${await helpers.nowDateTime()}`;
-    var json_metadata=JSON.stringify(metadata);
-await methods.accountUpdate(x, conf[x].active_key, conf[x].login, memo, json_metadata);
+let msg__update_str = `${balance_str},${curs_str},Комиссия ${conf[x].fee}%,${await helpers.nowDateTime()}`;
+await methods.accountUpdate(x, conf[x].active_key, conf[x].login, memo, msg__update_str);
 }
 
 msg_strings[x] = {};

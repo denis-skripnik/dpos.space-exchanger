@@ -21,8 +21,12 @@ async function getOpsInBlock(chain, bn) {
   return await connect[chain].api.getDynamicGlobalPropertiesAsync();
   }
   
-  async function accountUpdate(chain, active_key, login, memo, json_metadata) {
-      return await connect[chain].broadcast.accountUpdate(active_key, login, undefined, undefined, undefined, memo, json_metadata);
+  async function accountUpdate(chain, active_key, login, memo, str) {
+      let 					metadata={};
+                        metadata.profile={};
+                    metadata.profile.about= str;
+    var json_metadata=JSON.stringify(metadata);
+	  return await connect[chain].broadcast.accountUpdate(active_key, login, undefined, undefined, undefined, memo, json_metadata);
   }
   
   async function transfer(chain, wif, from, to, amount, memo) {
