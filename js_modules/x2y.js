@@ -94,7 +94,7 @@ return await sendTransfer(y, conf[y].active_key, conf[y].login, to, amount, memo
     }
     } else if (!chains.includes(exchange_data[0])) {
         console.log('Блокчейн: не существующий');
-        let memo = `Вероятно вы указали неподдерживаемый блокчейн или ошиблись в написании: поддерживается golos, steem, whaleshares, viz. Повторите попытку, пожалуйста.`;
+        let memo = `Вероятно вы указали неподдерживаемый блокчейн или ошиблись в написании. Варианты обмена в описании @${conf[x].login}. Формат memo: viz:nik (блокчейн:логин). Повторите попытку, пожалуйста.`;
         return await sendTransfer(x, conf[x].active_key, conf[x].login, data.from, data.amount, memo);
        }
 }
