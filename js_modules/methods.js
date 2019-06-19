@@ -2,7 +2,7 @@ var conf = require('../config.json');
 let connect = {};
 for (let blockchain in conf) {
 connect[blockchain] = require(conf[blockchain].lib);
-    if (blockchain === 'STEEM' or blockchain === 'whaleshares') {
+    if (blockchain === 'STEEM' || blockchain === 'whaleshares') {
         connect[blockchain].api.setOptions({ url: conf[blockchain].node});
     } else {
         connect[blockchain].config.set('websocket',conf[blockchain].node);
