@@ -1,11 +1,11 @@
 {
-  "name": "viz-exchange",
-  "version": "1.0.0",
+  "name": "Dpos.space-exchanger",
+  "version": "0.2.0",
   "description": "Viz-exchange - exchange service for Viz, Golos, Steem and Whaleshares blockchains.",
   "main": "exchange.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/denis-skripnik/viz-exchange.git"
+    "url": "git+https://github.com/denis-skripnik/dpos.space-exchanger.git"
   },
   "keywords": [
     "steem",
@@ -14,14 +14,14 @@
     "blockchains",
     "exchange",
     "whaleshares",
-    "services"
+    "dpos.space"
   ],
   "author": "denis-skripnik",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/denis-skripnik/viz-exchange/issues"
+    "url": "https://github.com/denis-skripnik/dpos.space-exchanger/issues"
   },
-  "homepage": "https://github.com/denis-skripnik/viz-exchange",
+  "homepage": "https://github.com/denis-skripnik/dpos.space-exchanger",
   "bin": {
     "exchange": "exchange.js"
   },
