@@ -1,24 +1,13 @@
-var conf = require('../config.json');
-let connect = {};
-for (let blockchain in conf) {
-connect[blockchain] = require(conf[blockchain].lib);
-    if (blockchain === 'STEEM' || blockchain === 'whaleshares') {
-        connect[blockchain].api.setOptions({ url: conf[blockchain].node});
-    } else {
-        connect[blockchain].config.set('websocket',conf[blockchain].node);
-    }
-}
-
 async function getOpsInBlock(chain, bn) {
-    return await connect[chain].api.getOpsInBlockAsync(bn, false);
+    return await chain.api.getOpsInBlockAsync(bn, false);
   }
   
   async function getAccount(chain, login) {
-  return await connect[chain].api.getAccountsAsync([login]);
+  return await chain.api.getAccountsAsync([login]);
   }
   
   async function getProps(chain) {
-  return await connect[chain].api.getDynamicGlobalPropertiesAsync();
+  return await chain.api.getDynamicGlobalPropertiesAsync();
   }
   
   async function accountUpdate(chain, active_key, login, memo, str) {
@@ -26,7 +15,7 @@ async function getOpsInBlock(chain, bn) {
                         metadata.profile={};
                     metadata.profile.about= str;
     var json_metadata=JSON.stringify(metadata);
-	  return await connect[chain].broadcast.accountUpdate(active_key, login, undefined, undefined, undefined, memo, json_metadata);
+	  return await chain.broadcast.accountUpdate(active_key, login, undefined, undefined, undefined, memo, json_metadata);
   }
   
   async function transfer(chain, wif, from, to, amount, memo) {
@@ -54,12 +43,12 @@ async function getOpsInBlock(chain, bn) {
     };
     var trxs = "";
     try {
-        trxs = await connect[chain].auth.signTransaction(trx, {"active": wif});
+        trxs = await chain.auth.signTransaction(trx, {"active": wif});
     } catch (error) {
         console.log("Не удалось подписать транзакцию: " + error.message);
     }
     try {
-    const broadcast_trx_sync = await connect[chain].api.broadcastTransactionSynchronousAsync(trxs);
+    const broadcast_trx_sync = await chain.api.broadcastTransactionSynchronousAsync(trxs);
   return broadcast_trx_sync.id;
     } catch(e) {
   return 0;
@@ -67,11 +56,11 @@ async function getOpsInBlock(chain, bn) {
   }
   
   async function getBlockHeader(chain, block_num) {
-  return await connect[chain].api.getBlockHeaderAsync(block_num);
+  return await chain.api.getBlockHeaderAsync(block_num);
   }
   
   async function getTransaction(chain, trxId) {
-  return await connect[chain].api.getTransactionAsync(trxId);
+  return await chain.api.getTransactionAsync(trxId);
   }
   
   module.exports.getOpsInBlock = getOpsInBlock;

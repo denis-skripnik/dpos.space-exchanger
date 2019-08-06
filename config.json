@@ -36,7 +36,7 @@
     "active": false,
 "token": "WLS",
 "lib": "@whaleshares/wlsjs",
-"node": "https://wls.kidw.space/",
+"node": "https://pubrpc.whaleshares.io/",
     "login": "user",
     "posting_key": "5j",
     "active_key": "5k",

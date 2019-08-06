@@ -1,17 +1,6 @@
 // Обменник. Получаем перевод в x блокчейне, даём - в y, указанном в memo.
-const helpers = require("./helpers");
-const methods = require("./methods");
-const trxdb = require("./transactionsdb");
-var conf = require('../config.json');
-let chains = [];
-for (let blockchain in conf) {
-    if (conf[blockchain].active === true) {
-    chains.push(blockchain);
-}
-}
-
-async function sendTransfer(chain, active_key, from, to, amount, memo) {
-    const transfer = await methods.transfer(chain, active_key, from, to, amount, memo);
+async function sendTransfer(connect, helpers, methods, trxdb, conf, chains, chain, active_key, from, to, amount, memo) {
+    const transfer = await methods.transfer(connect[chain], active_key, from, to, amount, memo);
     if (transfer !== 0) {
         const time = await helpers.unixTime();
         await trxdb.addTransaction(transfer, from, to, amount, memo, time, chain);
@@ -21,7 +10,7 @@ async function sendTransfer(chain, active_key, from, to, amount, memo) {
         }
 }
 
-async function processTransfer(x, data) {
+async function processTransfer(connect, helpers, methods, trxdb, conf, chains, x, data) {
 var x_token = conf[x].token;
     var memo = data.memo;
 memo = memo.toLowerCase();
@@ -44,7 +33,7 @@ amount /= 1000;
 amount = amount.toFixed(3);
 let receive_approve;
 try {
-        const exchange_receiver = await methods.getAccount(y, to);
+        const exchange_receiver = await methods.getAccount(connect[y], to);
 if (exchange_receiver.length > 0) {
     receive_approve = 'ok';
 } else {
@@ -56,7 +45,7 @@ console.log(e);
 }
 
 try {
-const from_account = await methods.getAccount(y, conf[y].login);
+const from_account = await methods.getAccount(connect[y], conf[y].login);
 let balance = parseFloat(from_account[0].balance);
 if (balance < amount) {
     receive_approve = 'noBalance';
@@ -99,8 +88,8 @@ return await sendTransfer(y, conf[y].active_key, conf[y].login, to, amount, memo
        }
 }
 
-async function processBlock(x, bn) {
-    const block = await methods.getOpsInBlock(x, bn);
+async function processBlock(connect, helpers, methods, trxdb, conf, chains, x, bn) {
+    const block = await methods.getOpsInBlock(connect[x], bn);
 let ok_ops_count = 0;
     for(let tr of block) {
         const [op, opbody] = tr.op;

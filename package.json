@@ -1,5 +1,32 @@
 {
+  "name": "viz-exchange",
+  "version": "1.0.0",
+  "description": "Viz-exchange - exchange service for Viz, Golos, Steem and Whaleshares blockchains.",
+  "main": "exchange.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denis-skripnik/viz-exchange.git"
+  },
+  "keywords": [
+    "steem",
+    "golos",
+    "viz",
+    "blockchains",
+    "exchange",
+    "whaleshares",
+    "services"
+  ],
+  "author": "denis-skripnik",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denis-skripnik/viz-exchange/issues"
+  },
+  "homepage": "https://github.com/denis-skripnik/viz-exchange",
+  "bin": {
+    "exchange": "exchange.js"
+  },
   "dependencies": {
+    "fs": "latest",
     "@whaleshares/wlsjs": "latest",
     "golos-js": "latest",
     "nedb": "^1.8.0",

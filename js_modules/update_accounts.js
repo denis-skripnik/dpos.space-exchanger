@@ -1,9 +1,5 @@
-const helpers = require("./helpers");
-const methods = require("./methods");
-const conf = require('../config.json');
-
     let msg_strings = [];
-async function updateAccounts() {
+async function updateAccounts(connect, helpers, methods, conf) {
     for (let x in conf) {
 if (conf[x].active === true) {
     let x_token = conf[x].token;
@@ -16,7 +12,7 @@ curs *= 1000;
 curs = parseInt(curs);
 curs /= 1000;
             let y_token = conf[y].token;
-    const get_account = await methods.getAccount(y, conf[y].login);
+    const get_account = await methods.getAccount(connect[y], conf[y].login);
     var fee = conf[x].fee;
     var balance = parseFloat(get_account[0].balance)/curs;
     var balance_fee = 0.01*balance*fee;
@@ -32,10 +28,10 @@ balance_str = balance_str.replace(/,\s*$/, "");
 curs_str = curs_str.replace(/,\s*$/, ""); 
 
 if (msg_strings[x] !== `${balance_str}. ${curs_str}.` || !msg_strings[x]) {
-const account_x = await methods.getAccount(x, conf[x].login);
+const account_x = await methods.getAccount(connect[x], conf[x].login);
 var memo = account_x[0].memo_key;
 let msg__update_str = `${balance_str},${curs_str},Комиссия ${conf[x].fee}%,${await helpers.nowDateTime()}`;
-await methods.accountUpdate(x, conf[x].active_key, conf[x].login, memo, msg__update_str);
+await methods.accountUpdate(connect[x], conf[x].active_key, conf[x].login, memo, msg__update_str);
 }
 
 msg_strings[x] = {};
